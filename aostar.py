@@ -22,13 +22,11 @@ def ao(node):
             solved.add(node)
         for n in todo:
             ao(n)
-
 def show(node):
     if node in best:
         print(node, "->", " AND ".join(n for n, c in best[node]))
         for n, c in best[node]:
             show(n)
-
 ao('A')
 print("Cost of A:", h['A'])
 print("Solution graph:")
