@@ -1,48 +1,20 @@
-N = 4  # You can change N to 5, 6, etc.
+N = 4
 
-def is_safe(board, row, col):
-    # Check column
-    for i in range(row):
-        if board[i] == col:
+def safe(b, r, c):
+    for i in range(r):
+        if b[i] == c or abs(b[i] - c) == r - i:
             return False
-
-    # Check diagonals
-    for i in range(row):
-        # Check upper left diagonal
-        if board[i] == col - (row - i):
-            return False
-
-        # Check upper right diagonal
-        if board[i] == col + (row - i):
-            return False
-
     return True
 
-
-def solve(board, row):
-    if row == N:
-        # A solution is found
-        print_board(board)
-        return
-
-    for col in range(N):
-        if is_safe(board, row, col):
-            board[row] = col
-            solve(board, row + 1)
-            board[row] = -1
-
-
-def print_board(board):
-    for row in range(N):
-        for col in range(N):
-            if board[row] == col:
-                print("Q", end=" ")
-            else:
-                print(".", end=" ")
+def solve(b, r):
+    if r == N:
+        for x in b:
+            print(" ".join("Q" if x == c else "." for c in range(N)))
         print()
-    print()
+        return
+    for c in range(N):
+        if safe(b, r, c):
+            b[r] = c
+            solve(b, r + 1)
 
-
-# Main execution
-board = [-1] * N
-solve(board, 0)
+solve([-1] * N, 0)
