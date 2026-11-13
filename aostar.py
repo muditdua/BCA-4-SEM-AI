@@ -7,10 +7,8 @@ graph = {
 h = {'A': 0, 'B': 5, 'C': 2, 'D': 4, 'E': 7, 'F': 9, 'G': 3, 'H': 6, 'J': 2}
 best = {}
 solved = set()
-
 def cost(opt):
     return sum(c + h[n] for n, c in opt)
-
 def ao(node):
     if node not in graph:
         solved.add(node)
